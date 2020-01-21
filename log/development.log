@@ -288,3 +288,18 @@ Processing by LevelsController#high_scores as */*
 Completed 200 OK in 77ms (Views: 54.1ms | ActiveRecord: 7.8ms | Allocations: 4418)
 
 
+Started GET "/" for ::1 at 2020-01-21 12:42:13 -0600
+  [1m[35m (2.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/kelleychaplain/.rvm/gems/ruby-2.6.1/gems/railties-6.0.2.1/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/kelleychaplain/.rvm/gems/ruby-2.6.1/gems/railties-6.0.2.1/lib/rails/templates/rails/welcome/index.html.erb (Duration: 23.5ms | Allocations: 316)
+Completed 200 OK in 49ms (Views: 44.9ms | ActiveRecord: 0.0ms | Allocations: 1605)
+
+
+Started GET "/players" for ::1 at 2020-01-21 12:42:20 -0600
+Processing by PlayersController#index as HTML
+  [1m[36mPlayer Load (1.4ms)[0m  [1m[34mSELECT "players".* FROM "players"[0m
+  ↳ app/controllers/players_controller.rb:5:in `index'
+Completed 200 OK in 73ms (Views: 18.5ms | ActiveRecord: 18.3ms | Allocations: 6437)
+
+
