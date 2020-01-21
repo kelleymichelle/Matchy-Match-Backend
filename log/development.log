@@ -1,0 +1,138 @@
+  [1m[35m (2.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreatePlayers (20191227052740)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "players" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20191227052740"]]
+  [1m[35m (8.3ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateGames (20191227052804)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "games" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "player_id" integer, "level_id" integer, "final_score" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20191227052804"]]
+  [1m[35m (1.5ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateTiles (20191227053224)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "tiles" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "front" varchar, "back" varchar, "level_id" integer, "game_id" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20191227053224"]]
+  [1m[35m (3.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateLevels (20191227053248)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE TABLE "levels" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "difficulty" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20191227053248"]]
+  [1m[35m (1.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-01-21 17:34:38.790460"], ["updated_at", "2020-01-21 17:34:38.790460"]]
+  [1m[35m (0.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started POST "/players" for ::1 at 2020-01-21 11:35:05 -0600
+  [1m[35m (2.6ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PlayersController#create as JSON
+  Parameters: {"name"=>"Kelley", "level"=>"very easy", "player"=>{"name"=>"Kelley"}}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/players_controller.rb:17:in `create'
+  [1m[36mPlayer Create (1.8ms)[0m  [1m[32mINSERT INTO "players" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Kelley"], ["created_at", "2020-01-21 17:35:05.580598"], ["updated_at", "2020-01-21 17:35:05.580598"]]
+  ↳ app/controllers/players_controller.rb:17:in `create'
+  [1m[35m (1.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/players_controller.rb:17:in `create'
+  [1m[36mLevel Load (0.6ms)[0m  [1m[34mSELECT "levels".* FROM "levels" WHERE "levels"."difficulty" = ? LIMIT ?[0m  [["difficulty", "very easy"], ["LIMIT", 1]]
+  ↳ app/controllers/players_controller.rb:44:in `very_easy_level_maker'
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/players_controller.rb:44:in `very_easy_level_maker'
+  [1m[36mLevel Create (0.5ms)[0m  [1m[32mINSERT INTO "levels" ("difficulty", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["difficulty", "very easy"], ["created_at", "2020-01-21 17:35:05.626011"], ["updated_at", "2020-01-21 17:35:05.626011"]]
+  ↳ app/controllers/players_controller.rb:44:in `very_easy_level_maker'
+  [1m[35m (1.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/players_controller.rb:44:in `very_easy_level_maker'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/players_controller.rb:46:in `very_easy_level_maker'
+  [1m[36mGame Create (1.2ms)[0m  [1m[32mINSERT INTO "games" ("player_id", "level_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["player_id", 1], ["level_id", 1], ["created_at", "2020-01-21 17:35:05.646178"], ["updated_at", "2020-01-21 17:35:05.646178"]]
+  ↳ app/controllers/players_controller.rb:46:in `very_easy_level_maker'
+  [1m[35m (1.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/players_controller.rb:46:in `very_easy_level_maker'
+  [1m[36mTile Update All (0.7ms)[0m  [1m[33mUPDATE "tiles" SET "level_id" = ? WHERE "tiles"."level_id" = ?[0m  [["level_id", nil], ["level_id", 1]]
+  ↳ app/controllers/players_controller.rb:48:in `very_easy_level_maker'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/players_controller.rb:51:in `block in very_easy_level_maker'
+  [1m[36mGame Load (0.2ms)[0m  [1m[34mSELECT "games".* FROM "games" WHERE "games"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/players_controller.rb:51:in `block in very_easy_level_maker'
+  [1m[36mTile Create (0.3ms)[0m  [1m[32mINSERT INTO "tiles" ("level_id", "game_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["level_id", 1], ["game_id", 1], ["created_at", "2020-01-21 17:35:05.672657"], ["updated_at", "2020-01-21 17:35:05.672657"]]
+  ↳ app/controllers/players_controller.rb:51:in `block in very_easy_level_maker'
+  [1m[35m (1.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/players_controller.rb:51:in `block in very_easy_level_maker'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/players_controller.rb:51:in `block in very_easy_level_maker'
+  [1m[36mGame Load (0.2ms)[0m  [1m[34mSELECT "games".* FROM "games" WHERE "games"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/players_controller.rb:51:in `block in very_easy_level_maker'
+  [1m[36mTile Create (0.6ms)[0m  [1m[32mINSERT INTO "tiles" ("level_id", "game_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["level_id", 1], ["game_id", 1], ["created_at", "2020-01-21 17:35:05.681468"], ["updated_at", "2020-01-21 17:35:05.681468"]]
+  ↳ app/controllers/players_controller.rb:51:in `block in very_easy_level_maker'
+  [1m[35m (1.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/players_controller.rb:51:in `block in very_easy_level_maker'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/players_controller.rb:51:in `block in very_easy_level_maker'
+  [1m[36mGame Load (0.1ms)[0m  [1m[34mSELECT "games".* FROM "games" WHERE "games"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/players_controller.rb:51:in `block in very_easy_level_maker'
+  [1m[36mTile Create (0.4ms)[0m  [1m[32mINSERT INTO "tiles" ("level_id", "game_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["level_id", 1], ["game_id", 1], ["created_at", "2020-01-21 17:35:05.720238"], ["updated_at", "2020-01-21 17:35:05.720238"]]
+  ↳ app/controllers/players_controller.rb:51:in `block in very_easy_level_maker'
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/players_controller.rb:51:in `block in very_easy_level_maker'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/players_controller.rb:51:in `block in very_easy_level_maker'
+  [1m[36mGame Load (0.1ms)[0m  [1m[34mSELECT "games".* FROM "games" WHERE "games"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/players_controller.rb:51:in `block in very_easy_level_maker'
+  [1m[36mTile Create (0.3ms)[0m  [1m[32mINSERT INTO "tiles" ("level_id", "game_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["level_id", 1], ["game_id", 1], ["created_at", "2020-01-21 17:35:05.729229"], ["updated_at", "2020-01-21 17:35:05.729229"]]
+  ↳ app/controllers/players_controller.rb:51:in `block in very_easy_level_maker'
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/players_controller.rb:51:in `block in very_easy_level_maker'
+Completed 200 OK in 162ms (Views: 0.3ms | ActiveRecord: 17.5ms | Allocations: 49144)
+
+
+Started GET "/games/1" for ::1 at 2020-01-21 11:35:05 -0600
+Processing by GamesController#show as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mGame Load (0.1ms)[0m  [1m[34mSELECT "games".* FROM "games" WHERE "games"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/games_controller.rb:9:in `show'
+  [1m[36mPlayer Load (0.2ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/games_controller.rb:10:in `show'
+  [1m[36mTile Load (0.3ms)[0m  [1m[34mSELECT "tiles".* FROM "tiles" INNER JOIN "levels" ON "tiles"."level_id" = "levels"."id" WHERE "levels"."id" = ?[0m  [["id", 1]]
+  ↳ app/controllers/games_controller.rb:10:in `show'
+Completed 200 OK in 21ms (Views: 18.3ms | ActiveRecord: 0.6ms | Allocations: 6381)
+
+
+Started PATCH "/games/1" for ::1 at 2020-01-21 11:35:18 -0600
+Processing by GamesController#update as JSON
+  Parameters: {"final_score"=>"12", "id"=>"1", "game"=>{"final_score"=>"12"}}
+  [1m[36mGame Load (0.1ms)[0m  [1m[34mSELECT "games".* FROM "games" WHERE "games"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/games_controller.rb:14:in `update'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/games_controller.rb:16:in `update'
+  [1m[36mPlayer Load (0.2ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/games_controller.rb:16:in `update'
+  [1m[36mLevel Load (0.2ms)[0m  [1m[34mSELECT "levels".* FROM "levels" WHERE "levels"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/games_controller.rb:16:in `update'
+  [1m[36mGame Update (3.4ms)[0m  [1m[33mUPDATE "games" SET "final_score" = ?, "updated_at" = ? WHERE "games"."id" = ?[0m  [["final_score", 12], ["updated_at", "2020-01-21 17:35:18.033144"], ["id", 1]]
+  ↳ app/controllers/games_controller.rb:16:in `update'
+  [1m[35m (3.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/games_controller.rb:16:in `update'
+Completed 200 OK in 22ms (Views: 0.7ms | ActiveRecord: 7.7ms | Allocations: 4883)
+
+
+Started GET "/levels/1/high_scores" for ::1 at 2020-01-21 11:35:18 -0600
+Processing by LevelsController#high_scores as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mLevel Load (0.3ms)[0m  [1m[34mSELECT "levels".* FROM "levels" WHERE "levels"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/levels_controller.rb:5:in `high_scores'
+  [1m[36mLevel Load (0.4ms)[0m  [1m[34mSELECT "levels".* FROM "levels" WHERE "levels"."difficulty" = ?[0m  [["difficulty", "very easy"]]
+  ↳ app/controllers/levels_controller.rb:6:in `high_scores'
+  [1m[36mGame Load (1.0ms)[0m  [1m[34mSELECT "games".* FROM "games" WHERE "games"."level_id" = ? AND "games"."final_score" IS NOT NULL ORDER BY "games"."final_score" ASC LIMIT ?[0m  [["level_id", 1], ["LIMIT", 5]]
+  ↳ app/controllers/levels_controller.rb:7:in `high_scores'
+  [1m[36mPlayer Load (0.2ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/levels_controller.rb:7:in `high_scores'
+  [1m[36mLevel Load (0.1ms)[0m  [1m[34mSELECT "levels".* FROM "levels" WHERE "levels"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/levels_controller.rb:7:in `high_scores'
+Completed 200 OK in 17ms (Views: 9.5ms | ActiveRecord: 2.0ms | Allocations: 4349)
+
+
